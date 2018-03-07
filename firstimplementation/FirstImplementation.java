@@ -1,5 +1,3 @@
-package testfortheweek.weekone.firstimplementation;
-
 /**
  * FirstImplementation is a class that takes care of sorting
  * two sorted arrays of integers
