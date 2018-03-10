@@ -25,23 +25,64 @@ public class SecondImplementation {
 		int firstIndex = 0;
 		int secondIndex = 0;
 
-		for (int resultIndex = 0; resultIndex < merged.length; resultIndex++){
+		boolean isMerged = mergeWhenEitherArrayIsEmpty(first, second, merged);
 
-			if (firstIndex < first.length && first[firstIndex] <= second[secondIndex]){
+		if (!isMerged) {
 
-				merged[resultIndex] = first[firstIndex];
-				firstIndex++;
+			for (int resultIndex = 0; resultIndex < merged.length; resultIndex++) {
 
-			} else {
+				if (firstIndex >= first.length){
+					merged[resultIndex] = second[secondIndex];
+					secondIndex++;
+					continue;
+				}
 
-				merged[resultIndex] = second[secondIndex];
-				secondIndex++;
+				if (secondIndex >= second.length){
+					merged[resultIndex] = first[firstIndex];
+					firstIndex++;
+					continue;
+				}
+
+				if (first[firstIndex] <= second[secondIndex]) {
+					merged[resultIndex] = first[firstIndex];
+					firstIndex++;
+				} else {
+					merged[resultIndex] = second[secondIndex];
+					secondIndex++;
+				}
 
 			}
 
 		}
-		
+
 		return mergedArrayAsString(merged);
+
+	}
+
+	private static boolean mergeWhenEitherArrayIsEmpty(int[] first, int[] second, int[] merged) {
+
+		boolean arrayIsMerged = false;
+
+		if (first.length == 0 || second.length == 0){
+
+			if (first.length == 0) {
+				caseWhereOneListIsEmpty(merged, second);
+			} else {
+				caseWhereOneListIsEmpty(merged, first);
+			}
+			arrayIsMerged = true;
+
+		}
+
+		return arrayIsMerged;
+
+	}
+
+	private static void caseWhereOneListIsEmpty(int[] arrayToFill, int[] nonEmptyArray){
+
+		for (int i = 0; i < nonEmptyArray.length; i++){
+			arrayToFill[i] = nonEmptyArray[i];
+		}
 
 	}
 
